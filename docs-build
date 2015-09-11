@@ -1,0 +1,15 @@
+#!/bin/bash 
+
+HTMLDIR=`git remote -v | awk 'NR==1' | sed 's/\(.*\):\(.*\)\.\(.*\)/\2/g'`
+
+HTMLPATH="${HOME}/html/${HTMLDIR}"
+
+mkdir -p ${HTMLPATH}
+
+THEME='readthedocs'
+
+if [ -d "/usr/local/lib/python2.7/dist-packages/mkdocs/themes/myreadthedocs" ]; then
+  THEME='myreadthedocs'
+fi
+
+mkdocs build -cq -d ${HTMLPATH} --theme=${THEME}
